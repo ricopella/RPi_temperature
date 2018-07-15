@@ -56,6 +56,7 @@ typings/
 
 # dotenv environment variables file
 .env
+.bash_profile
 
 # next.js build output
 .next
