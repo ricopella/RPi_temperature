@@ -4,7 +4,7 @@ const fs = require('fs');
 exec('modprobe w1-gpio');
 exec('modprobe w1-therm');
 
-const DEVICES_DIR = '/sys/bus/w1/devices/28-00000a29c8d6/w1_slave';
+const DEVICES_DIR = process.NODE_ENV === 'development' ? '../mocks/w1_slave' : '/sys/bus/w1/devices/28-00000a29c8d6/w1_slave';
 
 function getTemperature(scale) {
     const P = new Promise((resolve, reject) => {
