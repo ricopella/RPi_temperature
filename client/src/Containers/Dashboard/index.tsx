@@ -15,7 +15,7 @@ export default class Dashboard extends React.Component<{}, DashboardState> {
     };
   }
 
-  public componentDidMount() {
+  private getTemp = () => {
     API.getCurrentTemp()
       .then(res => {
         console.log({ res });
@@ -26,11 +26,17 @@ export default class Dashboard extends React.Component<{}, DashboardState> {
       .catch(err => {
         console.log('ERROR Container: ', { err });
       });
-  }
+  };
 
   public render() {
     const { temp } = this.state;
 
-    return <div>Temperature is: {temp ? temp : 'N/A'}</div>;
-  }
+    return (
+    <div>
+      <div>
+        Temperature is: <i>{temp ? temp : 'N/A'}</i>
+      </div>
+      <button onClick={this.getTemp}>Click Me!</button>
+    </div>
+    )}
 }
