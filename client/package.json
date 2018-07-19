@@ -1,24 +1,39 @@
 {
     "name": "rpi_temperature",
-    "version": "0.1.0",
     "private": true,
+    "version": "0.1.0",
     "dependencies": {
-        "react": "^16.4.1",
+        "@types/axios": "^0.14.0",
+        "axios": "^0.18.0",
         "react-dom": "^16.4.1",
-        "react-scripts-ts": "2.16.0"
-    },
-    "scripts": {
-        "start": "react-scripts-ts start",
-        "build": "react-scripts-ts build",
-        "test": "react-scripts-ts test --env=jsdom",
-        "eject": "react-scripts-ts eject"
+        "react-scripts-ts": "2.16.0",
+        "react": "^16.4.1"
     },
     "devDependencies": {
         "@types/jest": "^23.1.6",
         "@types/node": "^10.5.2",
         "@types/react": "^16.4.6",
         "@types/react-dom": "^16.0.6",
+        "lint-staged": "^7.2.0",
+        "prettier": "^1.13.7",
         "typescript": "^2.9.2"
     },
-    "proxy": "http://localhost:3001"
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "prettier --write",
+            "tslint --fix",
+            "git add"
+        ]
+    },
+    "proxy": "http://localhost:3001",
+    "scripts": {
+        "build": "react-scripts-ts build",
+        "eject": "react-scripts-ts eject",
+        "precommit": "lint-staged",
+        "prettier": [
+            "prettier --single-quote --trailing-comma es6 --write"
+        ],
+        "start": "react-scripts-ts start",
+        "test": "react-scripts-ts test --env=jsdom"
+    }
 }
