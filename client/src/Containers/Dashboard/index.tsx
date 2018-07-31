@@ -20,7 +20,7 @@ export default class Dashboard extends React.Component<{}, DashboardState> {
       .then(res => {
         console.log({ res });
         this.setState({
-          temp: res,
+          temp: res.data.temp,
         });
       })
       .catch(err => {
