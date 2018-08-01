@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-createNewTemperature();
+createNewTemperature.start();
 
 app.use((req, res) => res.status(404).send('Sorry can\'t find that!'));
 app.listen(port, () => console.log(`==> 🌎  Listening on PORT ${port}. Visit http://localhost:${port}`));

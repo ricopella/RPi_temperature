@@ -4,9 +4,9 @@ const { execFile } = require('child_process');
 import Temperature from '../models/temperature';
 
 // Every 5 minutes
-const INTERVAL = '* 5 * * *';
+const INTERVAL = '5 * * * *';
 
-const createNewTemperature = () => cron.schedule(INTERVAL, () => {
+const createNewTemperature = cron.schedule(INTERVAL, () => {
 	console.log('running a task every minute');
 	// eslint-disable-next-line
     const child = execFile('node', [path.join(__dirname, './temperature.js')], (error, stdout, stderr) => {
