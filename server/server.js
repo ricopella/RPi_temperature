@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import path from 'path';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 const port = process.env.PORT | 3001;
 const app = express();
@@ -32,6 +33,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.text());
 
 // Routes
+app.use(cors());
 app.use('/api/temp', temp);
 
 //  Server static assets if in production

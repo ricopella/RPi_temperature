@@ -23,7 +23,7 @@ function getTemperature(scale) {
             throw new Error('Device is not connected!');
         }
 
-        const temp = lines[1].split('t=')[1].trim();
+        const temp = rows[1].split('t=')[1].trim();
         const c = Math.ceil(parseFloat(temp) / 1000);
         const f = Math.ceil(c * 9.0 / 5.0 + 32.0);
 
