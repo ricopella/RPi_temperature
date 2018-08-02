@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import path from 'path';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import createNewTemperature from './scripts/addTemperature';
+import saveNewTemp from './scripts/addTemperature';
 
 const port = process.env.PORT | 3001;
 const app = express();
@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-createNewTemperature.start();
+setInterval(saveNewTemp, 300000);
 
 app.use((req, res) => res.status(404).send('Sorry can\'t find that!'));
 app.listen(port, () => console.log(`==> 🌎  Listening on PORT ${port}. Visit http://localhost:${port}`));
