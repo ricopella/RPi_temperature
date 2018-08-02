@@ -3,6 +3,7 @@ import * as React from 'react';
 import API from '../../Helpers/index';
 
 export interface DashboardState {
+  mostRecent: any;
   temp: AxiosResponse<any> | null;
 }
 
@@ -11,8 +12,17 @@ export default class Dashboard extends React.Component<{}, DashboardState> {
     super(props);
 
     this.state = {
+      mostRecent: null,
       temp: null,
     };
+  }
+
+  public componentDidMount() {
+    API.getMostRecent().then(res => {
+      this.setState({
+        mostRecent: res.data.temp[0]
+      }, () => console.log(this.state.mostRecent))
+    })
   }
 
   private getTemp = () => {
@@ -29,12 +39,15 @@ export default class Dashboard extends React.Component<{}, DashboardState> {
   };
 
   public render() {
-    const { temp } = this.state;
+    const { mostRecent, temp } = this.state;
+    const date = mostRecent && mostRecent.createdAt ? new Date(mostRecent.createdAt).toString() : 'N/A';
+    console.log(date);
 
     return (
     <div>
+      <h3>Most Recent Temperature: {mostRecent && mostRecent.temperature ? mostRecent.temperature : null}. Last check on {date}</h3>
       <div>
-        Temperature is: <i>{temp ? temp : 'N/A'}</i>
+        Current Temperature is: <i>{temp ? temp : 'N/A'}</i>
       </div>
       <button onClick={this.getTemp}>Click Me!</button>
     </div>

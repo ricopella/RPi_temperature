@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { execFile } = require('child_process');
 const path = require('path');
+const temperature = require('../../models/temperature');
 
 router.use((req, res, next) => {
 	console.log('Time: ', Date.now());
@@ -29,6 +30,15 @@ router.get('/now', (req, res) => {
 			throw error;
 		}
 		res.json({ temp: stdout });
+	});
+});
+
+router.get('/mostrecent', (req, res) => {
+	temperature.find().sort({ _id: -1 }).limit(1).then(temp => {
+		if (!temp) {
+			return res.status(404).json({ errors: { temp: 'No Temp Found' } });
+		}
+		return res.json({ temp });
 	});
 });
 

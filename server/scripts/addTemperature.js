@@ -2,7 +2,7 @@ const path = require('path');
 const { execFile } = require('child_process');
 import Temperature from '../models/temperature';
 
-const saveNewTemp = execFile('node', [path.join(__dirname, './temperature.js')], (error, stdout, stderr) => {
+const saveNewTemp = () => execFile('node', [path.join(__dirname, './temperature.js')], (error, stdout, stderr) => {
 	if (error) {
 		throw { error, stderr };
 	}
