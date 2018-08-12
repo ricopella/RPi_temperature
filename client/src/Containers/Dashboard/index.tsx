@@ -1,9 +1,12 @@
 import { AxiosResponse } from 'axios';
 import * as React from 'react';
-import API from '../../Helpers/index';
+
+import API from '../../Helpers';
+import { CurrentTempResponse } from '../../types';
+import { formatDate } from '../../utils/strings';
 
 export interface DashboardState {
-  mostRecent: any;
+  mostRecent: CurrentTempResponse | null;
   temp: AxiosResponse<any> | null;
 }
 
@@ -40,8 +43,7 @@ export default class Dashboard extends React.Component<{}, DashboardState> {
 
   public render() {
     const { mostRecent, temp } = this.state;
-    const date = mostRecent && mostRecent.createdAt ? new Date(mostRecent.createdAt).toString() : 'N/A';
-    console.log(date);
+    const date = mostRecent && mostRecent.createdAt ? formatDate(mostRecent.createdAt) : 'N/A';
 
     return (
     <div>
