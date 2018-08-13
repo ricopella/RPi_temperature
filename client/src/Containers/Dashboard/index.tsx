@@ -1,18 +1,37 @@
 import { AxiosResponse } from 'axios';
 import * as React from 'react';
-import API from '../../Helpers/index';
+
+import Dashboard from '../../Components/Organisms/Dashboard';
+import API from '../../Helpers';
+import { CurrentTempResponse } from '../../types';
 
 export interface DashboardState {
+  mostRecent: CurrentTempResponse | null;
   temp: AxiosResponse<any> | null;
 }
 
-export default class Dashboard extends React.Component<{}, DashboardState> {
+export default class DashboardContainer extends React.Component<
+  {},
+  DashboardState
+> {
   constructor(props: {}) {
     super(props);
 
     this.state = {
+      mostRecent: null,
       temp: null,
     };
+  }
+
+  public componentDidMount() {
+    API.getMostRecent().then(res => {
+      this.setState(
+        {
+          mostRecent: res.data.temp[0],
+        },
+        () => console.log(this.state.mostRecent),
+      );
+    });
   }
 
   private getTemp = () => {
@@ -29,14 +48,15 @@ export default class Dashboard extends React.Component<{}, DashboardState> {
   };
 
   public render() {
-    const { temp } = this.state;
-
+    const { mostRecent, temp } = this.state;
     return (
-    <div>
-      <div>
-        Temperature is: <i>{temp ? temp : 'N/A'}</i>
-      </div>
-      <button onClick={this.getTemp}>Click Me!</button>
-    </div>
-    )}
+      <React.Fragment>
+        <Dashboard
+          getTemp={this.getTemp}
+          temperature={temp}
+          mostRecent={mostRecent}
+        />
+      </React.Fragment>
+    );
+  }
 }
