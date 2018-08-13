@@ -1,0 +1,30 @@
+.dashboard-container {
+    height: 100%;
+}
+
+.dashboard-header {
+    display: grid;
+    text-align: center;
+}
+
+.dashboard-body {
+    margin-top: 20px;
+    display: grid;
+    text-align: center;
+}
+
+.dashboard-body i {
+    font-size: 2em;
+    display: grid;
+    align-items: center;
+}
+
+button {
+    color: #ffffff;
+    background-color: #006400;
+    font-size: 1.5em;
+    width: 400px;
+    height: 60px;
+    border: none;
+    margin: 30px 18% 0 18%;
+}

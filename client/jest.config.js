@@ -13,6 +13,8 @@ module.exports = {
     collectCoverageFrom: [
         'src/**/*.{js,jsx}',
         'src/**/*.{ts,tsx}',
+        'src/**/**/*.{ts,tsx}',
+        'src/**/**/*.{js,jsx}',
         '!src/**/*.stories.{js,jsx,ts,tsx}',
         '!src/**/validationSchema.ts',
         '!src/**/appStore/index.ts',
@@ -20,6 +22,7 @@ module.exports = {
         '!src/components/app/index.tsx',
         '!src/utils/scrollToTop.tsx',
         '!src/config/**',
+        '!src/registerServiceWorker.ts'
     ],
     testPathIgnorePatterns: ['/node_modules/'],
     coverageThreshold: {

@@ -1,16 +1,19 @@
 import { AxiosResponse } from 'axios';
 import * as React from 'react';
 
+import Dashboard from '../../Components/Organisms/Dashboard';
 import API from '../../Helpers';
 import { CurrentTempResponse } from '../../types';
-import { formatDate } from '../../utils/strings';
 
 export interface DashboardState {
   mostRecent: CurrentTempResponse | null;
   temp: AxiosResponse<any> | null;
 }
 
-export default class Dashboard extends React.Component<{}, DashboardState> {
+export default class DashboardContainer extends React.Component<
+  {},
+  DashboardState
+> {
   constructor(props: {}) {
     super(props);
 
@@ -22,10 +25,13 @@ export default class Dashboard extends React.Component<{}, DashboardState> {
 
   public componentDidMount() {
     API.getMostRecent().then(res => {
-      this.setState({
-        mostRecent: res.data.temp[0]
-      }, () => console.log(this.state.mostRecent))
-    })
+      this.setState(
+        {
+          mostRecent: res.data.temp[0],
+        },
+        () => console.log(this.state.mostRecent),
+      );
+    });
   }
 
   private getTemp = () => {
@@ -43,15 +49,14 @@ export default class Dashboard extends React.Component<{}, DashboardState> {
 
   public render() {
     const { mostRecent, temp } = this.state;
-    const date = mostRecent && mostRecent.createdAt ? formatDate(mostRecent.createdAt) : 'N/A';
-
     return (
-    <div>
-      <h3>Most Recent Temperature: {mostRecent && mostRecent.temperature ? mostRecent.temperature : null}. Last check on {date}</h3>
-      <div>
-        Current Temperature is: <i>{temp ? temp : 'N/A'}</i>
-      </div>
-      <button onClick={this.getTemp}>Click Me!</button>
-    </div>
-    )}
+      <React.Fragment>
+        <Dashboard
+          getTemp={this.getTemp}
+          temperature={temp}
+          mostRecent={mostRecent}
+        />
+      </React.Fragment>
+    );
+  }
 }

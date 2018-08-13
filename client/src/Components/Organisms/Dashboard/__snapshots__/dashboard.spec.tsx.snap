@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dashboard /> should match internal tree 1`] = `
+<div
+  className="dashboard-container"
+>
+  <div
+    className="tile"
+  >
+    <div
+      className="dashboard-header"
+    >
+      <h3>
+        Most Recent Temperature: 
+        N/A
+      </h3>
+      <span>
+        <i>
+          Last checked: 
+          N/A
+        </i>
+      </span>
+    </div>
+    <div
+      className="dashboard-body"
+    >
+      Current Temperature is: 
+      <i>
+        N/A
+      </i>
+    </div>
+    <button
+      onClick={[Function]}
+    >
+      Get Temperature!
+    </button>
+  </div>
+</div>
+`;
